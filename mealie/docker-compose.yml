@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  mealie:
+    container_name: mealie
+    image: hkotel/mealie
+    restart: always
+    ports:
+      - 9925:80
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: America/New_York
+    volumes:
+      - ./data:/app/data
+
+# default login
+# changeme@email.com
+# MyPassword

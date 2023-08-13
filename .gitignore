@@ -13,3 +13,8 @@ downloads/
 config.ovpn
 data/
 letsencrypt/
+import/
+upload/
+db/
+export/
+consume/
