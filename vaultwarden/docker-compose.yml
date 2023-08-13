@@ -1,0 +1,10 @@
+version: "3"
+services:
+  vaultwarden:
+    image: vaultwarden/server
+    container_name: vaultwarden
+    ports:
+      - 8092:80
+    volumes:
+      - ./data:/data
+    restart: unless-stopped

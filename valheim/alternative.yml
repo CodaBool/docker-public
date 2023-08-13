@@ -1,0 +1,49 @@
+version: "3.5"
+services:
+  valheim:
+    image: mbround18/valheim:latest
+    container_name: valheim
+    ports:
+      - "2456:2456/udp"
+    volumes:
+      - ./saves:/home/steam/.config/unity3d/IronGate/Valheim
+      - ./server:/home/steam/valheim
+      - ./backups:/home/steam/backups
+    environment:
+      PORT: 2456
+      AUTO_BACKUP: 1
+      AUTO_BACKUP_DAYS_TO_LIVE: 3
+      NAME: "Valhalla"
+      WORLD: "Dedicated"
+      PASSWORD: "password"
+      TYPE: "BepInEx"
+      MODS: https://cdn.thunderstore.io/live/repository/packages/ValheimPlus-ValheimPlus-9.9.8.zip,
+            https://valheim.thunderstore.io/package/download/Horem/Fantasy_Creatures/0.2.1,
+            https://valheim.thunderstore.io/package/download/RockerKitten/BoneAppetit/3.2.0,
+            https://valheim.thunderstore.io/package/download/Valkria/ValheimRAFT/1.3.1,
+            https://cdn.thunderstore.io/live/repository/packages/RandyKnapp-EpicLoot-0.8.9.zip,
+            https://cdn.thunderstore.io/live/repository/packages/ishid4-BetterArchery-1.7.6.zip,
+            https://cdn.thunderstore.io/live/repository/packages/RandyKnapp-EquipmentAndQuickSlots-2.0.15.zip,
+            https://cdn.thunderstore.io/live/repository/packages/Advize-PlantEverything-1.11.5.zip,
+            https://cdn.thunderstore.io/live/repository/packages/virtuaCode-TrashItems-1.2.4.zip,
+            https://cdn.thunderstore.io/live/repository/packages/Nexus-FarmGrid-0.2.0.zip,
+            https://cdn.thunderstore.io/live/repository/packages/Amar1729-BetterLadders-0.2.0.zip,
+            https://cdn.thunderstore.io/live/repository/packages/OdinPlus-OdinHorse-0.3.3.zip,
+            https://cdn.thunderstore.io/live/repository/packages/Eskylar-Troll_Visual_Upgrade-1.2.0.zip,
+            https://cdn.thunderstore.io/live/repository/packages/OdinPlus-BongLantern-1.0.1.zip,
+            https://cdn.thunderstore.io/live/repository/packages/Rolo-CustomSails-1.1.0.zip,
+            https://cdn.thunderstore.io/live/repository/packages/Skrip-SkToolbox-1.10.5.zip,
+            https://cdn.thunderstore.io/live/repository/packages/MaGic-Quick_Deposit-1.0.1.zip,
+            https://cdn.thunderstore.io/live/repository/packages/CookieMilk-Shipyard-1.0.9.zip,
+            https://cdn.thunderstore.io/live/repository/packages/Nexus-InstantMonsterLootDrop-0.2.11.zip,
+            https://cdn.thunderstore.io/live/repository/packages/RagnarokHCRP-MoreGates-1.0.11.zip,
+            https://cdn.thunderstore.io/live/repository/packages/Marlthon-LandAnimals-0.0.6.zip,
+            https://cdn.thunderstore.io/live/repository/packages/Marlthon-AirAnimals-0.0.2.zip,
+            https://cdn.thunderstore.io/live/repository/packages/Marlthon-SeaAnimals-0.0.8.zip,
+            https://cdn.thunderstore.io/live/repository/packages/Neobotics-RequipMe-0.1.3.zip,
+            https://cdn.thunderstore.io/live/repository/packages/OdinPlus-CapeRunic-0.0.4.zip,
+            https://cdn.thunderstore.io/live/repository/packages/OdinPlus-Better_Trader_Remake-2.1.3.zip,
+            https://cdn.thunderstore.io/live/repository/packages/KGvalheim-MagicOverhaul-1.5.594.zip,
+            https://cdn.thunderstore.io/live/repository/packages/purpledxd-LocateMerchant-1.0.1.zip,
+            https://cdn.thunderstore.io/live/repository/packages/abearcodes-SimpleRecycling-0.0.10.zip,
+            https://cdn.thunderstore.io/live/repository/packages/abearcodes-CraftingWithContainers-1.0.9.zip

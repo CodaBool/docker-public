@@ -1,0 +1,27 @@
+version: "3.5"
+services:
+  valheim:
+    image: ghcr.io/lloesche/valheim-server
+    container_name: valheim
+    cap_add:
+      - sys_nice
+    volumes:
+      - ./config:/config
+      - ./data:/opt/valheim
+    ports:
+      - "2456-2457:2456-2457/udp"
+      - "9001:9001/tcp"
+    env_file:
+      - ./.env
+    restart: always
+    stop_grace_period: 2m
+
+# create a .env file and add the following lines
+
+# SERVER_NAME=CodaBool
+# WORLD_NAME=CodaBool
+# SERVER_PASS=secret
+# SERVER_PUBLIC=false
+# BEPINEX=true
+# PUID=1000
+# PGID=1000

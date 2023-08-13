@@ -1,0 +1,20 @@
+version: '3'
+services:
+  plex:
+    container_name: plex
+    image: linuxserver/plex
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+    env_file:
+      - ./.env
+    volumes:
+      - ./config:/config
+      - /hdd/media/tv:/tv
+      - /hdd/media/movies:/movies
+
+# write your plex claim env var in a .env
+# PLEX_CLAIM=

@@ -1,0 +1,17 @@
+version: '3.5'
+services:
+  app:
+    image: jc21/nginx-proxy-manager
+    container_name: proxy
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 81:81
+      - 443:443
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+
+# go to localhost:81 and use Default login
+# username = admin@example.com
+# password = changeme

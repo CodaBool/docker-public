@@ -1,0 +1,15 @@
+junk*
+media/
+cache/
+jelly_config/
+vpn_config/
+gluetun/
+storage/
+pictures/
+database/
+.env
+config/
+downloads/
+config.ovpn
+data/
+letsencrypt/
