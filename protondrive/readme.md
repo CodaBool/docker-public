@@ -19,6 +19,17 @@ I've wrote docker lines but have now moved to using the binary.
 */5 * * * * cd /home/codabool/Documents && rclone bisync proton:/sync . --protondrive-replace-existing-draft --log-file /home/codabool/code/cron.log
 0 0 * * * rm /home/codabool/code/rclone-cron.log
 ```
+# Android
+I have bisync enabled with Termux. I have a loose note of relevant commands for this:
+
+```
+pkg install termux-exec cronie termux-services termux-setup-storage
+# restart termux session
+sv-enable crond
+crontab -e
+
+*/5 * * * * cd /data/data/com.termux/files/home/storage/shared/protondrive && rclone bisync proton:/sync . --protondrive-replace-existing-draft --log-file /data/data/com.termux/files/home/cron.log
+```
 
 # Mount
 > I found that mount worked for local changes but didn't pickup remote. So, I've moved away from this approach
