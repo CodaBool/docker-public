@@ -1,0 +1,7 @@
+# init sync
+init:
+  docker run -it --name onedrive -v ./conf:/onedrive/conf \
+    -v "./data:/onedrive/data" \
+    -e "ONEDRIVE_UID=1000" \
+    -e "ONEDRIVE_GID=1000" \
+    driveone/onedrive:edge

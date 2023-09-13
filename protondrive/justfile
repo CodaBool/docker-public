@@ -1,15 +1,9 @@
-# usage
-# https://rclone.org/commands/rclone_sync
+config:
+  rclone config
 
-# config folder is encrypted and owned by root 
+resync:
+  rclone bisync proton:/sync . --verbose --resync
 
-run:
-  docker run --rm --name rclone \
-    -v ./data:/data \
-    -v ./config:/config/rclone \
-    rclone/rclone sync --verbose . proton:/sync
-
-init:
-  docker run -it \
-    -v ./config:/config/rclone \
-    rclone/rclone config
+sync:
+  rclone bisync proton:/sync . --verbose
+  
