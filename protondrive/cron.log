@@ -1,0 +1,18 @@
+docker: Error response from daemon: Conflict. The container name "/rclone" is already in use by container "ef03ab940db62a2db4b1ed72dd575a2cc3fb6f34ff064b9d7a40635656b18e34". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+docker: Error response from daemon: Conflict. The container name "/rclone" is already in use by container "ef03ab940db62a2db4b1ed72dd575a2cc3fb6f34ff064b9d7a40635656b18e34". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+docker: Error response from daemon: Conflict. The container name "/rclone" is already in use by container "ef03ab940db62a2db4b1ed72dd575a2cc3fb6f34ff064b9d7a40635656b18e34". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+2023/09/13 00:47:08 INFO  : There was nothing to transfer
+2023/09/13 00:47:08 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         6.5s
+
+2023/09/13 00:48:06 INFO  : There was nothing to transfer
+2023/09/13 00:48:06 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         5.0s
+

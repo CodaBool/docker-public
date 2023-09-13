@@ -5,12 +5,14 @@ services:
     image: miniflux/miniflux
     container_name: rss
     env_file: ./.env
+    restart: always
     ports:
       - 8085:8080
     depends_on:
       - db
   db:
-    image: postgres:15
+    image: postgres
+    restart: always
     container_name: rss_db
     env_file: ./.env
     volumes:
