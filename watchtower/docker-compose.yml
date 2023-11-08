@@ -5,11 +5,4 @@ services:
     container_name: watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    # env_file:
-    #   - ./.env
-    # environment:
-    #   WATCHTOWER_MONITOR_ONLY: 'true'
-    #   WATCHTOWER_NOTIFICATIONS: email
-    #   WATCHTOWER_NOTIFICATION_EMAIL_SERVER: smtp.gmail.com
-    #   WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PORT: 587
-    command: vaultwarden valheim sync sonarr radarr qbit proxy plex photoprism photoprism_db jellyfin jackett bin mealie yarr rss
+    command: bin watchtower sync rss rss_db jackett radarr plex sonarr proxy photoprism rssedit paperless paperless_redis mealie qbit jellyfin

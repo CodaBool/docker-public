@@ -1,32 +1,22 @@
 version: "3.9"
 services:
-  vpn-qbit:
+  qbit:
     container_name: qbit
-    # originally used guillaumedsde/alpine-qbittorrent-openvpn but they deleted their repo
-    # so I've gone and reuploaded it to codabool/qbittorrent-openvpn
-    # more about their image and the false positive can be read at
-    # https://github.com/guillaumedsde/alpine-qbittorrent-openvpn
-    image: codabool/qbittorrent-openvpn
+    image: markusmcnugen/qbittorrentvpn
+    privileged: true
     restart: unless-stopped
     volumes:
       - ./config:/config
       - /hdd/qbit:/downloads
-      - /etc/localtime:/etc/localtime:ro
-      - ./config.ovpn:/etc/openvpn/custom/default.ovpn
     environment:
-      - OPENVPN_PROVIDER=CUSTOM # sets which folder to go into for the ovpn file. Leave CUSTOM
-      - OPENVPN_CONFIG= # leave empty so that the default.ovpn mounted is used
-      - PUID=1000
-      - PGID=1000
-      - LAN=192.168.0.0/24 # which IPs for allowlist for local connections
-      - TUN=/dev/net/tun
-      - DNS=1.1.1.1
-    env_file:
-      - ./.env
+      - VPN_ENABLED=yes
+      - LAN_NETWORK=192.168.0.0/24
+      # The following env vars are secret so set them within a .env file
+      #- VPN_USERNAME
+      #- VPN_PASSWORD
+    env_file: .env
     ports:
       - 8080:8080
-    cap_add:
-      - NET_ADMIN
 
 # If your VPN provider allows for openvpn connections you can use that here
 # If they provide a .ovpn file you can mount it by creating it here and calling it config.ovpn
@@ -37,18 +27,21 @@ services:
 # #up /etc/openvpn/update-resolv-conf
 # #down /etc/openvpn/update-resolv-conf
 
+# place the .ovpn file in a new folder of ./config/openvpn
+
 # Get the open vpn username & password from your VPN
 # place them in a .env file in the following format in a .env file
 
-# OPENVPN_USERNAME=
-# OPENVPN_PASSWORD=
+# VPN_USERNAME=
+# VPN_PASSWORD=
 
 # Once this is done you can start the container and reach qbittorrent on localhost:8080
-# You will need to perform a setting change in qBit WebUI -> Options -> Advanced -> Network Interface (select tun1)
+# default login is:
+# username = admin
+# password = adminadmin
+
+# You will need to perform a setting change in qBit WebUI -> Options -> Advanced -> Network Interface (select tun0)
 # This will force qbit to use the correct network device. Otherwise your IP will leak.
 
 # I would recommend ensuring that your IP is not leaking by doing a test over at ipleak.net
 # copy a magnet link and add the torrent link. Confirm that your host IP does show in torrent address
-
-# previously I used a Cloudflare tunnel but after setting the LAN environment properly this isn't necessary
-# https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-guide

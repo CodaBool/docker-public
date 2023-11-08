@@ -1,14 +1,16 @@
-version: "3.5"
+version: "3.9"
 services:
   sync:
-    image: syncthing/syncthing
+    image: lscr.io/linuxserver/syncthing
     container_name: sync
-    hostname: my-syncthing
     environment:
       - PUID=1000
       - PGID=1000
     volumes:
-      - /hdd/sync:/var/syncthing
+      - ./config:/config
+      - /hdd/sync:/sync
+      - /home/codabool/foundry/star_wars/data:/star_wars_foundry
+      - /home/codabool/foundry/data:/alien_foundry
     ports:
       - 8384:8384 # Web UI
       - 22000:22000/tcp # TCP file transfers

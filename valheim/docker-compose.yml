@@ -11,9 +11,8 @@ services:
     ports:
       - "2456-2457:2456-2457/udp"
       - "9001:9001/tcp"
-    env_file:
-      - ./.env
-    restart: always
+    env_file: .env
+    restart: unless-stopped
     stop_grace_period: 2m
 
 # create a .env file and add the following lines

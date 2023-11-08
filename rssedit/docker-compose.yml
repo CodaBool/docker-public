@@ -12,4 +12,3 @@ services:
 #      - REDDIT_USER=
 #      - REDDIT_CLIENT_ID=your_app_id
 #      - REDDIT_CLIENT_SECRET=your_app_secret
-#      - DEFAULT_SUBREDDIT=selfhosted

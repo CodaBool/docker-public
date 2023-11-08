@@ -1,11 +1,7 @@
-# A user needs to be created before authenticating yourself
-# - Run 'docker-compose run --rm paperless createsuperuser' to create a user with credentials
-# - Run 'docker-compose up -d' to start the service
-
 version: "3.9"
 services:
-  broker:
-    image: docker.io/library/redis:7
+  redis:
+    image: docker.io/library/redis
     restart: unless-stopped
     container_name: paperless_redis
     volumes:
@@ -15,9 +11,7 @@ services:
     container_name: paperless
     restart: unless-stopped
     depends_on:
-      - broker
-      - gotenberg
-      - tika
+      - redis
     ports:
       - "7075:8000"
     healthcheck:
@@ -28,27 +22,16 @@ services:
       - ./export:/usr/src/paperless/export
       - ./consume:/usr/src/paperless/consume
     env_file: .env
+    user: "1000:1000"
     environment:
-      PAPERLESS_REDIS: redis://broker:6379
-      # PAPERLESS_URL
-      # PAPERLESS_SECRET_KEY
-      PAPERLESS_TIKA_ENABLED: 1
-      PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
-      PAPERLESS_TIKA_ENDPOINT: http://tika:9998
+      PAPERLESS_REDIS: redis://redis
       COMPOSE_PROJECT_NAME: paperless
       PAPERLESS_OCR_LANGUAGE: eng
       PAPERLESS_TIME_ZONE: America/New_York
-  gotenberg:
-    image: docker.io/gotenberg/gotenberg:7.8
-    container_name: paperless_gotenberg
-    restart: unless-stopped
-    # The gotenberg chromium route is used to convert .eml files. We do not
-    # want to allow external content like tracking pixels or even javascript.
-    command:
-      - "gotenberg"
-      - "--chromium-disable-javascript=true"
-      - "--chromium-allow-list=file:///tmp/.*"
-  tika:
-    image: ghcr.io/paperless-ngx/tika
-    container_name: paperless_tika
-    restart: unless-stopped
+      USERMAP_UID: 1000
+      USERMAP_GID: 1000
+      # The following env vars are secret so set them within a .env file
+      #PAPERLESS_ADMIN_PASSWORD=
+      #PAPERLESS_ADMIN_USER=
+      #PAPERLESS_URL=
+      #PAPERLESS_SECRET_KEY=
