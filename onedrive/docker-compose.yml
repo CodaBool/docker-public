@@ -1,0 +1,12 @@
+version: "3"
+services:
+  onedrive:
+    image: driveone/onedrive:edge
+    container_name: onedrive
+    restart: unless-stopped
+    environment:
+      - ONEDRIVE_UID=1000
+      - ONEDRIVE_GID=1000
+    volumes: 
+      - ./conf:/onedrive/conf
+      - ./data:/onedrive/data
