@@ -7,6 +7,8 @@ services:
     env_file: .env
     ports:
       - 2342:2342
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:2342 || exit 1
     environment:
       PHOTOPRISM_ORIGINALS_LIMIT: 5000               # file size limit for originals in MB (defaults to 1000Mb)
       PHOTOPRISM_UPLOAD_NSFW: "true"                 # allows uploads that MAY be offensive (no effect without TensorFlow)

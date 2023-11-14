@@ -4,6 +4,8 @@ services:
     image: jc21/nginx-proxy-manager
     container_name: proxy
     restart: unless-stopped
+    healthcheck:
+      test: curl --fail http://localhost || exit 1
     ports:
       - 80:80
       - 81:81

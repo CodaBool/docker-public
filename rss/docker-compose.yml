@@ -6,6 +6,8 @@ services:
     container_name: rss
     env_file: .env
     restart: unless-stopped
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:8080 || exit 1
     ports:
       - 8085:8080
     depends_on:

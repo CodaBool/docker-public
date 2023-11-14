@@ -14,3 +14,5 @@ services:
     ports:
       - 9117:9117
     restart: unless-stopped
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:9117 || exit 1

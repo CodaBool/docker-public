@@ -4,7 +4,11 @@ services:
     container_name: plex
     image: linuxserver/plex
     restart: unless-stopped
-    network_mode: host
+    ports:
+     - 32400:32400
+#    network_mode: host
+    healthcheck:
+      test: nc -z 127.0.0.1 32400 || exit 1
     environment:
       - PUID=1000
       - PGID=1000

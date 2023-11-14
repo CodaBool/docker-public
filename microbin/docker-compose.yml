@@ -8,6 +8,11 @@ services:
      - 8081:8080
     volumes:
      - ./data:/app/microbin_data
+# image does not have curl or wget or nc. making it difficult to healthcheck
+# I submitted an issue to resolve this here:
+# https://github.com/szabodanika/microbin/issues/240
+#    healthcheck:
+#      test: nc -z 127.0.0.1 8080 || exit 1
     env_file: .env
     environment:
       # additional as well as more details can be found at this url

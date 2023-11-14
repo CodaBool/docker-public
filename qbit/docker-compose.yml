@@ -5,6 +5,9 @@ services:
     image: markusmcnugen/qbittorrentvpn
     privileged: true
     restart: unless-stopped
+    # wget is not present on this image
+    healthcheck:
+      test: curl --fail http://localhost:8080 || exit 1
     volumes:
       - ./config:/config
       - /hdd/qbit:/downloads

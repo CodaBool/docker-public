@@ -12,3 +12,14 @@ services:
 #      - REDDIT_USER=
 #      - REDDIT_CLIENT_ID=your_app_id
 #      - REDDIT_CLIENT_SECRET=your_app_secret
+
+
+# get the desired threshold using the top 10 monthly posts at https://www.reddit.com/r/SUBREDDIT/top/?t=month
+
+# divide it by the 100% karma rating for the sub at https://rssedit.codadash.com
+
+# multiply that by 100 to get the percent and copy the link from the RSS button.
+
+# e.g. selfhosted = 400 desired karma threshold  = 303% threshold = https://rssedit.codadash.com/?subreddit=selfhosted&threshold=303&view=rss
+
+
