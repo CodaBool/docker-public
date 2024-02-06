@@ -8,4 +8,4 @@ services:
       - WATCHTOWER_POLL_INTERVAL=86400 # default 24 hours
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: bin watchtower sync rss rss_db jackett radarr plex sonarr proxy photoprism rssedit paperless paperless_redis mealie qbit jellyfin
+#    command: bin watchtower sync rss rss_db jackett radarr plex sonarr proxy photoprism rssedit paperless paperless_redis mealie qbit jellyfin

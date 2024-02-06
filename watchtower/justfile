@@ -1,0 +1,12 @@
+monitor:
+  docker run \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -e WATCHTOWER_MONITOR_ONLY=true \
+    -e WATCHTOWER_SCHEDULE="* * * * * *" \
+    containrrr/watchtower 
+
+update:
+  docker run \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -e WATCHTOWER_SCHEDULE="* * * * * *" \
+    containrrr/watchtower
