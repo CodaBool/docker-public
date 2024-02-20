@@ -5,7 +5,9 @@ services:
     container_name: proxy
     restart: unless-stopped
     healthcheck:
-      test: curl --fail http://localhost || exit 1
+      test: /usr/bin/check-health
+    environment:
+      - DISABLE_IPV6=true
     ports:
       - 80:80
       - 81:81

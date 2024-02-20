@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  adgaurd:
+    image: adguard/adguardhome
+    container_name: adgaurd
+    volumes:
+      - ./data:/opt/adgaurdhome/work
+      - ./config:/opt/adgaurdhome/conf
+    restart: unless-stopped
+    network_mode: host
+
+
+# for Ubuntu
+#   - I needed to disable ipv6
+#   - I needed to disable local DNS server
+#   - I am using network host because using ports didn't work
