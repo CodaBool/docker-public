@@ -14,6 +14,8 @@ services:
 #      - REDDIT_CLIENT_SECRET=your_app_secret
 
 
+# requested on their issues tab a fix for nginx ipv6 issue
+
 # get the desired threshold using the top 10 monthly posts at https://www.reddit.com/r/SUBREDDIT/top/?t=month
 
 # divide it by the 100% karma rating for the sub at https://rssedit.codadash.com
