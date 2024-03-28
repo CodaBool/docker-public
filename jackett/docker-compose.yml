@@ -15,4 +15,4 @@ services:
       - 9117:9117
     restart: unless-stopped
     healthcheck:
-      test: wget --no-verbose --tries=1 --spider http://localhost:9117 || exit 1
+      test: wget --tries=1 --spider http://localhost:9117/UI/Login?cookiesChecked=1 || exit 1
