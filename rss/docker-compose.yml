@@ -12,6 +12,9 @@ services:
       - 8085:8080
     depends_on:
       - db
+    environment:
+      - POLLING_FREQUENCY=10 # default 60
+      - BATCH_SIZE=100 # default 100
   db:
     image: postgres
     restart: unless-stopped
@@ -22,6 +25,9 @@ services:
     healthcheck:
       test: ["CMD", "pg_isready"]
       start_period: 10s
+
+# environment variables
+# https://miniflux.app/docs/configuration.html
 
 # example .env
 # POSTGRES_PASSWORD=
