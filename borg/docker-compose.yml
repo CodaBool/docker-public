@@ -1,0 +1,16 @@
+version: '3'
+services:
+  borg:
+    image: horaceworblehat/borg-server
+    container_name: borg
+#    user: 1000:1000
+    environment:
+      BORG_SERVE_ADDITIONAL_ARGS: "--storage-quota 100G --append-only"
+      BORG_UID: "1000" # optional: your user id (run id in bash)
+      BORG_GID: "1000" # optional: your group id (run id in bash)
+    volumes:
+      - ./backup:/home/borg/backups # You can find your backups inside this volume
+      - ./config:/var/lib/docker-borg # This volume is used to persist the hosts ssh-keys across updates
+      - /home/codabool/.ssh/authorized_keys:/home/borg/.ssh/authorized_keys
+    ports:
+      - "2222:22"
