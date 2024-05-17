@@ -11,10 +11,8 @@ services:
       - TZ=America/New_York
     volumes:
       - ./config:/config
-      - ./tv:/tv
-      - ./downloads:/downloads
-#      - /hdd/media/tv:/tv
-#      - /hdd/qbit:/downloads
+      - /hdd/media/tv:/tv
+      - /hdd/downloads:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped

@@ -1,16 +1,19 @@
 # 🖥️ Self Host w/ Docker
 
-## To start
+## Start
 go into any folder and run a `docker-compose up -d` to start a service
 
-### Assumptions
-many of the compose files assume that a hardrive has been mounted to /hdd.
-
-This mount can be edited to fit your particular set up.
-
-## To fully use a service
+## Login
 Most require logging in with a browser and completing a initial set up.
 
 If there is any confusion usually the docker image's page will have additional details.
 
-You can search for an image at https://hub.docker.com
+## Folders
+Most services can have a local data or config folder. But a few services share data and expect a /hdd folder mounted. Additionally they expect the following pattern for media, downloads and syncing
+
+```
+/hdd/media/movies
+/hdd/media/tv
+/hdd/downloads
+/hdd/sync
+```

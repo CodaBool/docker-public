@@ -9,8 +9,7 @@ services:
       - PGID=1000
     volumes:
       - ./config:/config
-      - ./data:/sync
-#      - /hdd/sync:/sync
+      - /hdd/sync:/sync
 #      - /home/codabool/foundry/star_wars/data:/star_wars_foundry
 #      - /home/codabool/foundry/data:/alien_foundry
     ports:

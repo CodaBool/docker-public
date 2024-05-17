@@ -10,10 +10,8 @@ services:
       - TZ=America/New_York
     volumes:
       - ./config:/config
-      - ./movies:/movies
-      - ./downloads:/downloads
-#      - /hdd/media/movies:/movies
-#      - /hdd/qbit:/downloads
+      - /hdd/downloads:/downloads
+      - /hdd/media/movies:/movies
     ports:
       - 7878:7878
     restart: unless-stopped
