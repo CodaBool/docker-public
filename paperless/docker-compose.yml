@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   redis:
     image: docker.io/library/redis
@@ -7,7 +6,7 @@ services:
     healthcheck:
       test: redis-cli ping
     volumes:
-      - ./data:/data
+      - ./cache:/data
   paperless:
     image: ghcr.io/paperless-ngx/paperless-ngx
     container_name: paperless
@@ -33,7 +32,7 @@ services:
 #      USERMAP_UID: 1000
 #      USERMAP_GID: 1000
       # The following env vars are secret so set them within a .env file
-      #PAPERLESS_ADMIN_PASSWORD=
-      #PAPERLESS_ADMIN_USER=
-      #PAPERLESS_URL=
-      #PAPERLESS_SECRET_KEY=
+      # PAPERLESS_ADMIN_PASSWORD=
+      # PAPERLESS_ADMIN_USER=
+      # PAPERLESS_URL=
+      # PAPERLESS_SECRET_KEY=this is any random long string of characters

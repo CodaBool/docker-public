@@ -1,11 +1,10 @@
-version: "3.9"
 services:
   mealie:
     container_name: mealie
-    image: hkotel/mealie
+    image: ghcr.io/mealie-recipes/mealie
     restart: unless-stopped
     ports:
-      - 9925:80
+      - 9925:9000
     environment:
       PUID: 1000
       PGID: 1000

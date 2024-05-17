@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   sync:
     image: lscr.io/linuxserver/syncthing
@@ -10,9 +9,10 @@ services:
       - PGID=1000
     volumes:
       - ./config:/config
-      - /hdd/sync:/sync
-      - /home/codabool/foundry/star_wars/data:/star_wars_foundry
-      - /home/codabool/foundry/data:/alien_foundry
+      - ./data:/sync
+#      - /hdd/sync:/sync
+#      - /home/codabool/foundry/star_wars/data:/star_wars_foundry
+#      - /home/codabool/foundry/data:/alien_foundry
     ports:
       - 8384:8384 # Web UI
       - 22000:22000/tcp # TCP file transfers

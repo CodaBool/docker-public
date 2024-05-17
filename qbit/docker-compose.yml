@@ -1,50 +1,40 @@
-version: "3.9"
 services:
-  qbit:
-    container_name: qbit
-    image: markusmcnugen/qbittorrentvpn
-    privileged: true
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: vpn
     restart: unless-stopped
-    # wget is not present on this image
-    healthcheck:
-      test: curl --fail http://localhost:8080 || exit 1
-    volumes:
-      - ./config:/config
-      - /hdd/qbit:/downloads
-    environment:
-      - VPN_ENABLED=yes
-      - LAN_NETWORK=192.168.0.0/24
-      # The following env vars are secret so set them within a .env file
-      #- VPN_USERNAME
-      #- VPN_PASSWORD
-    env_file: .env
+    cap_add:
+      - NET_ADMIN
     ports:
       - 8080:8080
+      - 6881:6881
+    # an openvpn config is also possible
+    # I went with wiregaurd because it's more performant
+    env_file: .env
+    # environment:
+    #   - VPN_SERVICE_PROVIDER=custom
+    #   - VPN_TYPE=wireguard
+    #   - VPN_ENDPOINT_IP=
+    #   - VPN_ENDPOINT_PORT=51820
+    #   - WIREGUARD_PUBLIC_KEY=
+    #   - WIREGUARD_PRIVATE_KEY=
+    #   - WIREGUARD_ADDRESSES=
+  qbit:
+    image: lscr.io/linuxserver/qbittorrent
+    container_name: qbit
+    network_mode: service:gluetun
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+    volumes:
+      - ./config:/config
+      - ./downloads:/downloads
+    restart: unless-stopped
 
-# If your VPN provider allows for openvpn connections you can use that here
-# If they provide a .ovpn file you can mount it by creating it here and calling it config.ovpn
-# I use ProtonVPN and did need to manually comment out 3 lines for the .ovpn file they game me
-# They are as follows:
-
-# #script-security 2
-# #up /etc/openvpn/update-resolv-conf
-# #down /etc/openvpn/update-resolv-conf
-
-# place the .ovpn file in a new folder of ./config/openvpn
-
-# Get the open vpn username & password from your VPN
-# place them in a .env file in the following format in a .env file
-
-# VPN_USERNAME=
-# VPN_PASSWORD=
-
-# Once this is done you can start the container and reach qbittorrent on localhost:8080
-# default login is:
-# username = admin
-# password = adminadmin
-
-# You will need to perform a setting change in qBit WebUI -> Options -> Advanced -> Network Interface (select tun0)
-# This will force qbit to use the correct network device. Otherwise your IP will leak.
-
-# I would recommend ensuring that your IP is not leaking by doing a test over at ipleak.net
-# copy a magnet link and add the torrent link. Confirm that your host IP does show in torrent address
+# setup
+# 1. set options > advanced to tun0 
+# 2. update password (initial password is in qbit logs)
+# 3. can use ipleak.net to check if leaking

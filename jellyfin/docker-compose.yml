@@ -1,17 +1,19 @@
-version: "3"
 services:
   jellyfin:
-    image: jellyfin/jellyfin
+    image: lscr.io/linuxserver/jellyfin
     container_name: jellyfin
-    user: 1000:1000
-    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
     volumes:
       - ./config:/config
-      - ./cache:/cache
-      - /hdd/media:/media
+      - ./media:/media
+    ports:
+      - 8096:8096
     restart: unless-stopped
 
-# create these two folders inside /hdd/media
+# create these two folders inside the mounted media folder
 # ensure that user 1000 has privilges for these
 # - tv
 # - movies

@@ -1,15 +1,12 @@
-version: "3"
 services:
   watchtower:
     # https://containrrr.dev/watchtower/arguments
     image: containrrr/watchtower
     container_name: watchtower
-    restart: always
+    restart: unless-stopped
     environment:
-#      - WATCHTOWER_POLL_INTERVAL=86400 # default 24 hours
       - WATCHTOWER_SCHEDULE=0 0 6 * * *
       - WATCHTOWER_CLEANUP=true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /etc/localtime:/etc/localtime:ro
-#    command: bin watchtower sync rss rss_db jackett radarr plex sonarr proxy photoprism rssedit paperless paperless_redis mealie qbit jellyfin

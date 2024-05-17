@@ -1,5 +1,3 @@
-
-version: '3'
 services:
   reddit-top-rss:
     image: johnny5w/reddit-top-rss
@@ -12,6 +10,9 @@ services:
 #      - REDDIT_USER=
 #      - REDDIT_CLIENT_ID=your_app_id
 #      - REDDIT_CLIENT_SECRET=your_app_secret
+
+# create your app here https://www.reddit.com/prefs/apps
+# follow instructions here https://github.com/johnwarne/reddit-top-rss
 
 
 # requested on their issues tab a fix for nginx ipv6 issue
