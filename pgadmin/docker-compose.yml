@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    container_name: pgadmin
+    user: "${UID}:${GID}"
+    ports:
+      - 80:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=codabool@pm.me
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    volumes:
+      - ./data:/var/lib/pgadmin
+
+# on arch you either run from container or do a python install
+# https://www.pgadmin.org/download/pgadmin-4-python/
