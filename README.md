@@ -17,3 +17,7 @@ Most services can have a local data or config folder. But a few services share d
 /hdd/downloads
 /hdd/sync
 ```
+
+# Access
+I use a cloudflare tunnel for several services. I [block access](dash.cloudflare.com/?to=/:account/codabool.com/security/waf) to the ones I want only available on my devices by configuring a WAF rule 
+

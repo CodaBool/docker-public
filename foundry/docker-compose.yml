@@ -2,6 +2,8 @@ services:
   foundry:
     image: felddy/foundryvtt
     container_name: foundry
+    healthcheck:
+      test: curl --fail http://localhost:30000 || exit 1
     volumes:
       - ./data:/data
     env_file: .env

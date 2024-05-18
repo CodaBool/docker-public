@@ -3,6 +3,8 @@ services:
     container_name: prowlarr
     image: ghcr.io/hotio/prowlarr
     restart: unless-stopped
+    healthcheck:
+      test: pgrep Prowlarr > /dev/null || exit 1
     ports:
       - 9696:9696
     environment:
