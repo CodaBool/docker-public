@@ -7,6 +7,7 @@ services:
     stdin_open: true
     ports:
       - 25565:25565
+      - 25575:25575
     environment:
       EULA: "TRUE"
       VERSION: "1.20.4"

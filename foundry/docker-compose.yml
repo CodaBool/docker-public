@@ -1,0 +1,14 @@
+services:
+  foundry:
+    image: felddy/foundryvtt
+    container_name: foundry
+    volumes:
+      - ./data:/data
+    env_file: .env
+    environment:
+      - FOUNDRY_GID=1000
+      - FOUNDRY_UID=1000
+      - FOUNDRY_HOT_RELOAD=true
+      - FOUNDRY_VERSION=11.315
+    ports:
+      - 30000:30000
