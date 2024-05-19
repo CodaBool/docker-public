@@ -9,5 +9,8 @@ services:
 # env has
 # TUNNEL_TOKEN=
 
-
+# there is no way to healthcheck this without building on this image
+# its made using distroless debian
+# an issue is put out for this:
+# https://github.com/cloudflare/cloudflared/issues/1126
 

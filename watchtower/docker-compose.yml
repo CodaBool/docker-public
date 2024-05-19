@@ -10,3 +10,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /etc/localtime:/etc/localtime:ro
+
+# the healthcheck that watchtower puts out just checks that there
+# is not another watchtower process running
+
