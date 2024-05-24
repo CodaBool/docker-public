@@ -1,5 +1,6 @@
 services:
   minecraft:
+    # https://docker-minecraft-server.readthedocs.io/en/latest/configuration/server-properties
     image: itzg/minecraft-server
     container_name: minecraft
     restart: unless-stopped
@@ -8,14 +9,30 @@ services:
     ports:
       - 25565:25565
       - 25575:25575
+    env_file: .env
     environment:
       EULA: "TRUE"
-      VERSION: "1.20.6"
+      VERSION: "1.20.4"
+      DIFFICULTY: "normal"
+      ENFORCE_WHITELIST: "true"
+      ENABLE_WHITELIST: "true"
+      LEVEL: "the_secret_life_of_crows"
 #      MOD_PLATFORM: "MODRINTH"
     volumes:
       - ./data:/data
+  backups:
+    # https://github.com/itzg/docker-mc-backup
+    image: itzg/mc-backup
+    container_name: minecraft_backup
+    env_file: .env
+    restart: unless-stopped
+    environment:
+      BACKUP_NAME: "the_secret_life_of_crows"
+      RCON_HOST: minecraft
+    volumes:
+      - ./data:/data:ro
+      - ./backup:/backups
 
-# change both of these to true in server.properties
-#   white-list=true
-#   enforce-whitelist=true
 
+# env file has this variable
+#   RCON_PASSWORD=
