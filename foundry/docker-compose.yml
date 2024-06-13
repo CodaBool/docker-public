@@ -11,6 +11,8 @@ services:
       - FOUNDRY_GID=1000
       - FOUNDRY_UID=1000
       - FOUNDRY_HOT_RELOAD=true
+# https://foundryvtt.com/releases/
       - FOUNDRY_VERSION=11.315
+#      - FOUNDRY_VERSION=12.327
     ports:
       - 30000:30000

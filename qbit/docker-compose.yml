@@ -7,7 +7,7 @@ services:
       - NET_ADMIN
     ports:
       - 8080:8080
-      - 6881:6881
+      - 39762:39762
     # an openvpn config is also possible
     # I went with wiregaurd because it's more performant
     env_file: .env

@@ -2,64 +2,46 @@ services:
   immich-server:
     container_name: immich
     image: ghcr.io/immich-app/immich-server:release
-    command: ['start.sh', 'immich']
-    volumes:
-      - ./upload:/usr/src/app/upload
-      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
     env_file: .env
     ports:
       - 2283:3001
-    depends_on:
-      - redis
-      - database
-    restart: unless-stopped
-
-  immich-microservices:
-    container_name: immich_microservices
-    image: ghcr.io/immich-app/immich-server:release
-#    extends: # uncomment this section for hardware acceleration - see https://immich.app/docs/features/hardware-transcoding
-#      file: hwaccel.transcoding.yml
-#      service: cpu # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
-    command: ['start.sh', 'microservices']
     volumes:
       - ./upload:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
-    env_file: .env
     depends_on:
       - redis
       - database
-    restart: unless-stopped
 
   machine-learning:
     container_name: immich_machine_learning
     image: ghcr.io/immich-app/immich-machine-learning:release
-#    extends: # uncomment this section for hardware acceleration - see https://immich.app/docs/features/ml-hardware-acceleration
-#      file: hwaccel.ml.yml
-#      service: cpu # set to one of [armnn, cuda, openvino, openvino-wsl] for accelerated inference - use the `-wsl` version for WSL2 where applicable
-    volumes:
-      - ./cache:/cache
     env_file: .env
     restart: unless-stopped
+    volumes:
+      - ./cache:/cache
 
   redis:
     container_name: immich_redis
-    image: registry.hub.docker.com/library/redis:6.2-alpine@sha256:84882e87b54734154586e5f8abd4dce69fe7311315e2fc6d67c29614c8de2672
+    image: docker.io/redis:6.2-alpine@sha256:d6c2911ac51b289db208767581a5d154544f2b2fe4914ea5056443f62dc6e900
     restart: unless-stopped
     healthcheck:
-      test: redis-cli ping
+      test: redis-cli ping || exit 1
 
   database:
     container_name: immich_postgres
-    image: registry.hub.docker.com/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
+    image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
     env_file: .env
+    volumes:
+      - ./data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready", "-d", "${DB_DATABASE_NAME}"]
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_DB: ${DB_DATABASE_NAME}
-    volumes:
-      - ./data:/var/lib/postgresql/data
+      POSTGRES_INITDB_ARGS: '--data-checksums'
+    command: ["postgres", "-c" ,"shared_preload_libraries=vectors.so", "-c", 'search_path="$$user", public, vectors', "-c", "logging_collector=on", "-c", "max_wal_size=2GB", "-c", "shared_buffers=512MB", "-c", "wal_compression=on"]
     restart: unless-stopped
 
 # example .env file
