@@ -1,8 +1,7 @@
 services:
   foundry:
     image: felddy/foundryvtt
-    container_name: foundry
-    restart: unless-stopped
+    container_name: foundry_2
     healthcheck:
       test: curl --fail http://localhost:30000 || exit 1
     volumes:
@@ -12,12 +11,12 @@ services:
       - FOUNDRY_GID=1000
       - FOUNDRY_UID=1000
 #      - FOUNDRY_HOT_RELOAD=true
+      - FOUNDRY_CSS_THEME=scifi
 # https://foundryvtt.com/releases/
       - FOUNDRY_VERSION=11.315
+#      - FOUNDRY_VERSION=12.327
       - CONTAINER_PRESERVE_CONFIG=true
       - FOUNDRY_MINIFY_STATIC_FILES=true
       - FOUNDRY_TELEMETRY=false
-      - FOUNDRY_CSS_THEME=scifi
-#      - FOUNDRY_VERSION=12.327
     ports:
-      - 30000:30000
+      - 30001:30000
