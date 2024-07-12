@@ -1,0 +1,11 @@
+services:
+  flaresolverr:
+    container_name: flaresolverr
+    image: ghcr.io/flaresolverr/flaresolverr
+    restart: unless-stopped
+    healthcheck:
+      test: curl --fail http://localhost:8191 || exit 1
+    ports:
+      - 8191:8191
+    environment:
+      - TZ=America/New_York
