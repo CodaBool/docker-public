@@ -12,6 +12,7 @@ services:
       - ./config:/config
       - /hdd/downloads:/downloads
       - /hdd/media/movies:/movies
+#      - /addTrackers.sh:/m
     ports:
       - 7878:7878
     restart: unless-stopped
