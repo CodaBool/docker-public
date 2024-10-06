@@ -13,7 +13,7 @@ services:
       - FOUNDRY_UID=1000
 #      - FOUNDRY_HOT_RELOAD=true
 # https://foundryvtt.com/releases/
-      - FOUNDRY_VERSION=11.315
+      - FOUNDRY_VERSION=12.331
       - CONTAINER_PRESERVE_CONFIG=true
       - FOUNDRY_MINIFY_STATIC_FILES=true
       - FOUNDRY_TELEMETRY=false

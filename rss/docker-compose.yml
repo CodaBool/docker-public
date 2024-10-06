@@ -6,14 +6,16 @@ services:
     env_file: .env
     restart: unless-stopped
     healthcheck:
-      test: wget --no-verbose --tries=1 --spider http://localhost:8080 || exit 1
+      test: /usr/bin/miniflux -healthcheck auto
     ports:
       - 8085:8080
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       - POLLING_FREQUENCY=10 # default 60
       - BATCH_SIZE=100 # default 100
+      - RUN_MIGRATIONS=1
   db:
     image: postgres
     restart: unless-stopped
@@ -23,15 +25,19 @@ services:
       - ./data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD", "pg_isready"]
-      start_period: 10s
+      start_period: 30s
 
 # environment variables
 # https://miniflux.app/docs/configuration.html
 
 # example .env
 # POSTGRES_PASSWORD=
-# RUN_MIGRATIONS=1
-# CREATE_ADMIN=1
+# CREATE_ADMIN=1 # only needed for first startup
 # ADMIN_USERNAME=
 # ADMIN_PASSWORD=
 # DATABASE_URL=postgres://postgres:PASSWORD@rss_db/postgres?sslmode=disable
+
+
+# This app frequently breaks due to postgres incompatibility
+# Use this guide for upgrading major versions
+# https://github.com/orgs/miniflux/discussions/2045#discussioncomment-7535806

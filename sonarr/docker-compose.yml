@@ -12,7 +12,8 @@ services:
     volumes:
       - ./config:/config
       - /hdd/media/tv:/tv
-      - /hdd/downloads:/downloads
+      - /hdd/downloads:/data/downloads
+#      - /hdd/downloads:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
