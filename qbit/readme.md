@@ -7,6 +7,8 @@
 # Block unwanted file ext
 Public trackers can contain malware. Best to block common file extenstions that can be used for that purpose. Here is my exhaustive list of unwanted file types. Add these to your Downloads > Exclude File Names (new line separated)
 
+> If you intend on downloading more than just video and subtitle files. Then don't copy this full list.
+
 ```
 *.sh
 *.pyd
