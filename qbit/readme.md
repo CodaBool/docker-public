@@ -37,6 +37,7 @@ Public trackers can contain malware. Best to block common file extenstions that 
 *.url
 *.lnk
 *.link
+*.etc
 *.diz
 *.ini
 *.xml
