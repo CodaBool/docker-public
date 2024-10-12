@@ -1,23 +1,21 @@
 services:
   plex:
     container_name: plex
-    image: plexinc/pms-docker
+    image: linuxserver/plex
     restart: unless-stopped
-    env_file: ./.env
-    environment:
-     - PLEX_UID=1000
-     - PLEX_GID=1000
-     - VERSION=docker
     ports:
-     - 32414:32414/udp
-     - 32413:32413/udp
-     - 32412:32412/udp
-     - 32410:32410/udp
-     - 1901:1900/udp
-     - 32469:32469/udp
-     - 8324:8324/tcp
-     - 32400:32400/tcp
+     - 32400:32400
+    healthcheck:
+      test: nc -z 127.0.0.1 32400 || exit 1
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+    # The following env vars are secret so set them within a .env file
+    # - PLEX_CLAIM=
+    # - ADVERTISE_IP=http://LOCAL_IP_HERE:32400/
+    env_file: .env
     volumes:
-     - /hdd/media:/data
-     - ./new_config:/condig
-     - ./transcode:/transcode
+      - ./config:/config
+      - /hdd/media/tv:/tv
+      - /hdd/media/movies:/movies

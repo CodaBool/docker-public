@@ -1,0 +1,24 @@
+services:
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+     - PLEX_UID=1000
+     - PLEX_GID=1000
+     - VERSION=docker
+    ports:
+     - 32414:32414/udp
+     - 32413:32413/udp
+     - 32412:32412/udp
+     - 32410:32410/udp
+     - 1901:1900/udp
+     - 32469:32469/udp
+     - 8324:8324/tcp
+     - 32400:32400/tcp
+    volumes:
+#     - ./data:/data
+     - /hdd/media:/data
+     - ./config:/config
+     - ./transcode:/transcode
