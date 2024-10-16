@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     env_file: .env
     ports:
-      - 2283:3001
+      - 2283:2283
     volumes:
       - ./upload:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
