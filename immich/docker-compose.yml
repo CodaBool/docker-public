@@ -24,8 +24,8 @@ services:
   redis:
     container_name: immich_redis
     # update this image to match the example for latest image hashes
-    # https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
-    image: docker.io/redis:6.2-alpine@sha256:2d1463258f2764328496376f5d965f20c6a67f66ea2b06dc42af351f75248792
+    # https://github.com/immich-app/immich/blob/main/docker/docker-compose.yml
+    image: docker.io/redis:6.2-alpine
     restart: unless-stopped
     healthcheck:
       test: redis-cli ping || exit 1
@@ -33,8 +33,9 @@ services:
   database:
     container_name: immich_postgres
     # update this image to match the example for latest image hashes
-    # https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
-    image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
+    # https://github.com/immich-app/immich/blob/main/docker/docker-compose.yml
+    image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0
+#    image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
     env_file: .env
     volumes:
       - ./data:/var/lib/postgresql/data
