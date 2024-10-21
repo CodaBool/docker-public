@@ -1,6 +1,6 @@
 services:
   factorio:
-    image: factoriotools/factorio
+    image: factoriotools/factorio:2.0.7
     container_name: factorio
     restart: unless-stopped
     env_file: .env
@@ -55,6 +55,8 @@ services:
 #  - ore = 0.8 freq, 1.2 size (forces strategy/trains)
 #  - enemy bases = 1.2 freq, 1.2 size (more enemies)
 
+# Game Settings
+# - afk kick on 4 minutes
 
 
 # Common RCON commands
