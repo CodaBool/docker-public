@@ -1,0 +1,61 @@
+services:
+  factorio:
+    image: factoriotools/factorio
+    container_name: factorio
+    restart: unless-stopped
+    env_file: .env
+    ports:
+     - 34197:34197/udp
+     - 27015:27015/tcp
+    volumes:
+     - ./data:/factorio
+#     - ./server-settings.json:/server-settings.json
+    environment:
+     - GENERATE_NEW_SAVE=true
+     - SAVE_NAME=pierce_the_heavens
+
+# The following env are stored in a env file
+#     - TOKEN=
+#     - USERNAME=
+
+
+
+# Recommended changes
+# - add yourself as an admin under ./data/config/server-adminlist.json 
+#   will need to create the file, the image will chmod for you
+
+#  [
+#   "CodaBool"
+#  ]
+
+# - add usernames under the whitelist ./data/config/server-whitelist.json
+#   will need to create the file, the image will chmod for you
+#  [
+#   "CodaBool"
+#  ]
+
+# - edit the server config under ./data/config/server-settings.json
+
+
+# - get the password for rcon under ./data/config/rconpw
+
+
+# Difficulty
+
+# To get some added difficulty I have made these modifications
+# I took inspiration from the Death mode to find which values to adjust
+
+# Map Settings
+# - enemy time_factor *2 (faster enemy evolution)
+# - enemy pollution_factor 0.0000009-> 0.0000011 (pollution gives faster evo)
+# - ageing 1 -> 0.8 (trees absorb less pollution)
+# - enemy_attack_pollution_consumption_modifier 1-> 0.8 (enemy attacks don't consume all pollution)
+
+# Map Gen Settings
+#  - ore = 0.8 freq, 1.2 size (forces strategy/trains)
+#  - enemy bases = 1.2 freq, 1.2 size (more enemies)
+
+
+
+# Common RCON commands
+# https://wiki.factorio.com/Console
