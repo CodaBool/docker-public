@@ -1,7 +1,7 @@
 services:
   factorio:
     # https://hub.docker.com/r/factoriotools/factorio
-    image: factoriotools/factorio:2.0.7
+    image: factoriotools/factorio:2.0.9
     container_name: factorio
     restart: unless-stopped
     env_file: .env
