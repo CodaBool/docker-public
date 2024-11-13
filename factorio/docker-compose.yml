@@ -1,7 +1,7 @@
 services:
   factorio:
     # https://hub.docker.com/r/factoriotools/factorio
-    image: factoriotools/factorio:2.0.11
+    image: factoriotools/factorio:2.0.15
     container_name: factorio
     restart: unless-stopped
     env_file: .env
@@ -13,7 +13,9 @@ services:
 #     - ./server-settings.json:/server-settings.json
     environment:
      - GENERATE_NEW_SAVE=true
-     - SAVE_NAME=pierce_the_heavens
+#     - SAVE_NAME=pierce_the_heavens
+     - SAVE_NAME=_autosave35
+     - LOAD_LATEST_SAVE=false
 
 # The following env are stored in a env file
 #     - TOKEN=

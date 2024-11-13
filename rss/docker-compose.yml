@@ -17,14 +17,15 @@ services:
       - BATCH_SIZE=100 # default 100
       - RUN_MIGRATIONS=1
   db:
-    image: postgres
+    # https://miniflux.app/docs/docker.html#docker-compose
+    image: postgres:17-alpine
     restart: unless-stopped
     container_name: rss_db
     env_file: .env
     volumes:
       - ./data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "pg_isready"]
+      test: ["CMD", "pg_isready", "-U", "postgres"]
       start_period: 30s
 
 # environment variables
