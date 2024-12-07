@@ -5,6 +5,11 @@ services:
     container_name: tunnel
     command: tunnel run
     env_file: .env
+    environment:
+      - TUNNEL_METRICS=0.0.0.0:60123
+    healthcheck:
+      test: ["CMD", "cloudflared", "tunnel", "--metrics", "localhost:60123", "ready"]
+
 
 # env has
 # TUNNEL_TOKEN=
