@@ -29,6 +29,7 @@ cp -r data/saves "backup/$TIMESTAMP-v$CURRENT_TAG"
 echo "Saves backed up"
 echo "Updating from $CURRENT_TAG to $STABLE_TAG"
 
-sed -i -E "s|(factoriotools/factorio:)[0-9]+\.[0-9]+\.[0-9]+|\1$STABLE_TAG|g" "docker-compose.yml"
+sed -i -E "s|(factoriotools/factorio:?)([0-9]+\.[0-9]+\.[0-9]+)?|\1$STABLE_TAG|g" "docker-compose.yml"
+
 docker compose up -d
 echo -e "\n ☝️  Pierce the Heavens"

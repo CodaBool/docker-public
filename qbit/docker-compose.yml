@@ -8,17 +8,23 @@ services:
     ports:
       - 8080:8080
       - 39762:39762
-    # an openvpn config is also possible
-    # I went with wiregaurd because it's more performant
+    devices:
+      - /dev/net/tun:/dev/net/tun
+# https://github.com/qdm12/gluetun-wiki/blob/main/setup/providers/protonvpn.md
+# wiregaurd is more performant
+    environment:
+      - VPN_SERVICE_PROVIDER=protonvpn
+      - VPN_TYPE=wireguard
+      - VPN_ENPOINT_PORT=51820
     env_file: .env
-    # environment:
-    #   - VPN_SERVICE_PROVIDER=custom
-    #   - VPN_TYPE=wireguard
-    #   - VPN_ENDPOINT_IP=
-    #   - VPN_ENDPOINT_PORT=51820
-    #   - WIREGUARD_PUBLIC_KEY=
-    #   - WIREGUARD_PRIVATE_KEY=
-    #   - WIREGUARD_ADDRESSES=
+# the remaining values can be generated from inside your account
+# https://account.proton.me/u/0/vpn/WireGuard
+
+# WIREGUARD_PRIVATE_KEY= under Interface.PrivateKey
+# WIREGUARD_ADDRESSES= under Interface.Address
+# WIREGUARD_PUBLIC_KEY= under Peer.PublicKey
+# WIREGUARD_ENDPOINT_IP= under Peer.Endpoint
+
   qbit:
     image: lscr.io/linuxserver/qbittorrent
     container_name: qbit

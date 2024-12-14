@@ -1,8 +1,10 @@
 # links
-- https://github.com/qbittorrent/search-plugins/wiki/Unofficial-search-plugins
+- [Qbittorrent search plugin](https://github.com/qbittorrent/search-plugins/wiki/Unofficial-search-plugins)
+- [ProtonVPN guide](https://github.com/qdm12/gluetun-wiki/blob/main/setup/providers/protonvpn.md)
 
 # trackers
 > scripts which add additional trackers exist to but are used by radarr and sonarr, so the details for that are in those folders
+
 
 # Block unwanted file ext
 Public trackers can contain malware. Best to block common file extenstions that can be used for that purpose. Here is my exhaustive list of unwanted file types. Add these to your Downloads > Exclude File Names (new line separated)
